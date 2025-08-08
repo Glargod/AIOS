@@ -9,6 +9,7 @@
         h1, h2 { color: #1a73e8; }
         .section { margin-bottom: 20px; }
         code { background: #f4f4f4; padding: 2px 5px; }
+        .annex { border-left: 4px solid #1a73e8; padding-left: 10px; }
     </style>
 </head>
 <body>
@@ -47,7 +48,7 @@
         <ol>
             <li><strong>Traditional Coding:</strong> Developers write HLLs (e.g., Python, C++), which compile into machine code, often resulting in bloated systems (e.g., 20-30GB OSes) and requiring specialized skills.</li>
             <li><strong>AI-Assisted Coding:</strong> Tools like xAI’s Grok 4 automate up to 90% of coding tasks (Qodo.ai, 2025), but still depend on human-defined structures.</li>
-            <li><strong>Descriptive Development:</strong> Users provide clear descriptions (e.g., "an app that trains musical note recognition" or "a Mars rover control tool displaying temperature and terrain data"), and AIOS transforms these into efficient ASM, eliminating the need for coding expertise. This mirrors Elon’s neural net model, where intent directly shapes the output. For example, a description like "Mars rover app with voice commands for navigation and sensor data display" could yield a 4KB ASM app for the Galaxy S20, simulating rover operations with <500ms latency.</li>
+            <li><strong>Descriptive Development:</strong> Users provide clear descriptions (e.g., "an app that trains musical note recognition" or "a Mars rover control tool displaying temperature and terrain data"), and AIOS transforms these into efficient ASM, eliminating the need for coding expertise. This mirrors Elon’s neural net model, where intent directly shapes the output.</li>
             <li><strong>Adaptive Evolution:</strong> AIOS customizes ASM for specific devices (e.g., Galaxy S20’s ARM64), creating a sustainable, user-driven app ecosystem.</li>
         </ol>
         <p>This empowers individuals like Robert Charest to describe innovative applications—such as a Mars rover tool—and have AIOS build them, realizing a code-less, efficient software future.</p>
@@ -59,8 +60,59 @@
     </div>
 
     <div class="section">
+        <h2>Example Annex</h2>
+        <div class="annex">
+            <h3>Mars Rover Control and Data Visualization App</h3>
+            <p><strong>Description:</strong> "A Mars rover control tool that accepts voice commands (e.g., 'move forward 10 meters') and displays simulated sensor data (e.g., temperature -50°C to 20°C, terrain map) on a Galaxy S20."</p>
+            <p><strong>AIOS Output:</strong> A 4KB ARM64 ASM app with functions for sensor simulation, command processing, and framebuffer display. Example snippet:</p>
+            <pre><code>
+// ARM64 ASM for Mars Rover App
+.section .text
+.global _start
+_start:
+    BL init_rover
+main_loop:
+    BL gen_sensor_data  // Random temp, terrain
+    BL display_data     // Show on framebuffer
+    BL wait_command     // Voice/text input
+    BL process_command  // Execute command
+    BL log_entry        // Store data
+    B main_loop
+// Stubs: init_rover, gen_sensor_data, etc.
+.section .data
+temp_buf: .asciz "Temp: %d°C\n"
+</code></pre>
+            <p><strong>Notes:</strong> Optimized for <500ms latency, customizable (e.g., "add color to terrain") if permitted.</p>
+        </div>
+        <div class="annex">
+            <h3>Musical Note Training App</h3>
+            <p><strong>Description:</strong> "An app that generates musical notes one at a time and waits for the user to choose the correct note to train recognition, on a Galaxy S20."</p>
+            <p><strong>AIOS Output:</strong> A 3KB ARM64 ASM app with audio playback and input validation. Example snippet:</p>
+            <pre><code>
+// ARM64 ASM for Note Trainer
+.section .text
+.global _start
+_start:
+    BL rand_note        // Generate MIDI note
+    MOV X1, X0          // Store note
+    BL play_note        // Play via DAC
+    BL wait_input       // Wait for user choice
+    CMP X0, X1          // Compare
+    B.EQ correct_branch
+    B wrong_branch
+correct_branch: ADR X0, msg_correct; BL display_msg; B next
+wrong_branch:   ADR X0, msg_wrong;  BL display_msg; B next
+// Stubs: rand_note, play_note, etc.
+.section .data
+msg_correct: .asciz "Correct!\n"
+</code></pre>
+            <p><strong>Notes:</strong> <200ms response, open to visual tweaks (e.g., "red text").</p>
+        </div>
+    </div>
+
+    <div class="section">
         <h2>Call to Action</h2>
         <p>Collaborate with xAI to redefine software. Prototype on <a href="https://github.com/glargod/AIOS-Proposal">GitHub</a>. Contact Robert Charest at robcharest@hotmail.com or @BobTheFixer73 on X to explore this vision!</p>
     </div>
-        </body>
-        </html> 
+</body>
+        </html>
